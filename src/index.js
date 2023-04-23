@@ -14,7 +14,15 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (req, res) => {console.log('Precursor')})
+app.get('/', (req, res) => {
+    try {        
+        res.status(200).send("Precursor backend");
+    }
+    catch(err){
+        return res.status(400).send(err);
+    }
+})
+
 app.get('/users', async (req, res) => {
     try {
         const { rows } = await pool.query('SELECT * FROM users');
